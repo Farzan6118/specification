@@ -1,36 +1,45 @@
 package com.example.specification.model;
 
+import com.example.specification.enums.RecordStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity {
+public class BaseEntity<ID extends Serializable> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private ID id;
 
     @CreatedDate
-    @Column(columnDefinition = "time")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime createdTime;
+    @Column(nullable = false)
+    private LocalDateTime createdDate;
 
-    @CreatedDate
-    @Column(columnDefinition = "date")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate createdDate;
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 
     @CreatedBy
-    private String createdBy;
+    @Column(nullable = false)
+    private UUID createdBy;
+
+    @LastModifiedBy
+    private UUID lastModifiedBy;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RecordStatus recordStatus = RecordStatus.CREATED;
+
 }

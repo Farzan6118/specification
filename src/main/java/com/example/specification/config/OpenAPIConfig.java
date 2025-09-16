@@ -19,19 +19,12 @@ public class OpenAPIConfig {
     @Value("${api.dev.url}")
     private String devUrl;
 
-    @Value("${api.prod.url}")
-    private String prodUrl;
-
     @Bean
     public OpenAPI customOpenAPI() {
         // Define development and production servers
         Server devServer = new Server()
                 .url(devUrl)
                 .description("Development Server");
-
-        Server prodServer = new Server()
-                .url(prodUrl)
-                .description("Production Server");
 
         // Define contact information
         Contact contact = new Contact()
@@ -49,7 +42,6 @@ public class OpenAPIConfig {
                 .title("Video Streaming Service API")
                 .version("1.0")
                 .contact(contact)
-                .description("This API provides endpoints for managing video streaming services.")
                 .termsOfService("https://github.com/Farzan6118/")
                 .license(mitLicense);
 
@@ -64,7 +56,7 @@ public class OpenAPIConfig {
         // Return the configured OpenAPI instance
         return new OpenAPI()
                 .info(apiInfo)
-                .servers(List.of(devServer, prodServer));
-//                .components(components);
+                .servers(List.of(devServer))
+                .components(components);
     }
 }

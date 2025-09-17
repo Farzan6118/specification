@@ -1,4 +1,4 @@
-package com.example.specification.controller;
+package com.example.specification.controller.rest;
 
 import com.example.specification.model.Employee;
 import com.example.specification.service.EmployeeService;
@@ -22,21 +22,5 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> selectAll() {
         return ResponseEntity.ok(employeeService.selectAll());
     }
-
-    @GetMapping("orderBySalary")
-    public ResponseEntity<List<Employee>> orderBySalary() {
-        return ResponseEntity.ok(employeeService.orderBySalary());
-    }
-
-    @GetMapping("orderById")
-    public ResponseEntity<List<Employee>> orderById() {
-        return ResponseEntity.ok(employeeService.orderById());
-    }
-
-    @GetMapping("orderByIdBiggerThan5")
-    public ResponseEntity<List<Employee>> orderByIdBiggerThan5() {
-        return ResponseEntity.ok(employeeService.orderByIdBiggerThan5());
-    }
-
 
 }

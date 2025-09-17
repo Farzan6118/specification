@@ -4,12 +4,6 @@ import com.example.specification.model.Employee;
 
 import java.util.List;
 
-public interface EmployeeService {
+public interface EmployeeService extends BaseService<Employee, Integer> {
     List<Employee> selectAll();
-
-    List<Employee> orderBySalary();
-
-    List<Employee> orderById();
-
-    List<Employee> orderByIdBiggerThan5();
 }

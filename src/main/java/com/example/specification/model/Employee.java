@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -12,14 +13,15 @@ import java.util.List;
 @Entity
 public class Employee extends BaseEntity<Integer> {
 
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
+    private String username;
+    private LocalDateTime employmentDate;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Contact> contact;
+    private List<Address> address;
     private String nationalCode;
-    private String email;
+    private String phoneNumber;
     private BigDecimal salary;
-    @ManyToOne
-    private Office office;
+    private String email;
 
 }

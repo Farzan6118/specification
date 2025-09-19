@@ -23,7 +23,13 @@ spring:
 # API URLs for different environments
 api:
   dev:
-    url: http://localhost:9090
+    url: http://localhost:9080
+
+
+
+system:
+  default:
+    uuid: c5f74501-f845-4f3e-a70a-e2ab7793244c
 
 springdoc:
   #  api-docs:

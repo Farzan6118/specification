@@ -4,6 +4,7 @@ import com.example.specification.enums.RecordStatus;
 import com.example.specification.model.BaseEntity;
 import com.example.specification.repository.BaseRepository;
 import com.example.specification.service.BaseService;
+import org.apache.coyote.BadRequestException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +17,10 @@ public abstract class BaseServiceImpl<U extends BaseRepository<T, ID>,
 
     public BaseServiceImpl(U repository) {
         this.repository = repository;
+    }
+
+    public T getById(ID id) throws BadRequestException {
+        return repository.getById(id);
     }
 
     @Override
@@ -47,5 +52,9 @@ public abstract class BaseServiceImpl<U extends BaseRepository<T, ID>,
     @Override
     public void saveAll(List<T> entities) {
         repository.saveAll(entities);
+    }
+
+    public void deleteById(ID id) {
+        repository.deleteById(id);
     }
 }

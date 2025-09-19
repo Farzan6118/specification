@@ -3,8 +3,8 @@ package com.example.specification.repository.impl;
 import com.example.specification.model.BaseEntity;
 import com.example.specification.repository.BaseRepository;
 import com.example.specification.repository.jpa.BaseJpa;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,11 +20,6 @@ public class BaseRepositoryImpl<U extends BaseJpa<T, ID>,
     }
 
     @Override
-    public Page<T> findAll(PageRequest pageRequest) {
-        return jpaRepository.findAll(pageRequest);
-    }
-
-    @Override
     public T save(T entity) {
         return jpaRepository.save(entity);
     }
@@ -35,13 +30,35 @@ public class BaseRepositoryImpl<U extends BaseJpa<T, ID>,
     }
 
     @Override
+    public void deleteById(ID id) {
+        if (!jpaRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        jpaRepository.deleteById(id);
+    }
+
+    @Override
     public Optional<T> findById(ID id) {
         return jpaRepository.findById(id);
     }
 
     @Override
+    public T getById(ID id) {
+        return jpaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+    }
+
+    @Override
     public List<T> findAll() {
-        return jpaRepository.findAll();
+        List<T> entities = jpaRepository.findAll();
+        if (entities.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        return entities;
+    }
+
+    @Override
+    public long count() {
+        return jpaRepository.count();
     }
 
     @Override

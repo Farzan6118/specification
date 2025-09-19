@@ -1,4 +1,4 @@
-package com.example.specification.model;
+package com.example.specification.specification;
 
 import org.springframework.data.jpa.domain.Specification;
 

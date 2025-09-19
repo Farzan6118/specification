@@ -1,15 +1,12 @@
 package com.example.specification.service;
 
+import com.example.specification.enums.AddressType;
 import com.example.specification.model.Address;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface AddressService extends BaseService<Address, Integer> {
-    List<Address> selectAll();
 
-    List<Address> orderBySalary();
+    Page<Address> search(String city, String province, String postalCode, AddressType addressType, Boolean isDefault,
+                         Integer page, Integer size, String sortBy, boolean ascending);
 
-    List<Address> orderById();
-
-    List<Address> orderByIdBiggerThan5();
 }

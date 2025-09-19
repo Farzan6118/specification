@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/employee")
 @Tag(
@@ -27,11 +29,11 @@ public class EmployeeController {
     }
 
 //    // --- Get All ---
-//    @GetMapping
-//    @Operation(summary = "Get all employees", description = "Retrieve a list of all employees")
-//    public ResponseEntity<List<Employee>> selectAll() {
-//        return ResponseEntity.ok(employeeService.findAll());
-//    }
+@GetMapping
+@Operation(summary = "Get all employees", description = "Retrieve a list of all employees")
+public ResponseEntity<List<Employee>> selectAll() {
+    return ResponseEntity.ok(employeeService.findAll());
+}
 
 //    // --- Get By Id ---
 //    @GetMapping("/{id}")

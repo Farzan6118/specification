@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/address")
 @Tag(
@@ -28,11 +30,11 @@ public class AddressController {
     }
 
 //    // --- Get All ---
-//    @GetMapping
-//    @Operation(summary = "Get all addresses", description = "Retrieve a list of all stored addresses")
-//    public ResponseEntity<List<Address>> selectAll() {
-//        return ResponseEntity.ok(addressService.findAll());
-//    }
+@GetMapping
+@Operation(summary = "Get all addresses", description = "Retrieve a list of all stored addresses")
+public ResponseEntity<List<Address>> selectAll() {
+    return ResponseEntity.ok(addressService.findAll());
+}
 
 //    // --- Get By Id ---
 //    @GetMapping("/{id}")
